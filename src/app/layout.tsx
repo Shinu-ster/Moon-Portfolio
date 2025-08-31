@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.css";
 import Providers from "../components/Providers";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Moon style Portfolio",
@@ -12,11 +13,16 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  path?: string;
 }>) {
+  const showBackground =
+    typeof window !== "undefined" ? window.location.pathname === "/" : true;
+    // console.log(showBackground)
   return (
     <html lang="en">
       <body className="relative z-10">
-        <Providers>{children}</Providers>
+        <Toaster/>
+        {showBackground ? <Providers>{children}</Providers> : <>{children}</>}
       </body>
     </html>
   );

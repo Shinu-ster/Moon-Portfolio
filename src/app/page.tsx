@@ -1,10 +1,9 @@
-import Image from "next/image";
-import Section from "../components/Section";
+import Section from "@/components/Section";
 
 export default function Home() {
   return (
     <>
-      <Section id="hero" className="bg-black/30 min-h[60vh] section">
+      <Section id="hero" className="bg-black/30 min-h-[60vh] section">
         <div className="text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-4">
             Waxing Crescent - Hero
