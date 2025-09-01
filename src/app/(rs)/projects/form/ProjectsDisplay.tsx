@@ -27,7 +27,7 @@ export default function ProjectsDisplay() {
     fetch("/api/projects")
       .then((res) => res.json())
       .then((data) => setProjects(data))
-      .catch((err) => toast.error("Failed to load Projects"));
+      .catch((err) => toast.error("Failed to load Projects ",err));
 
     
     const handleNewProject = (e: Event) => {

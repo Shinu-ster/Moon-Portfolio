@@ -26,10 +26,11 @@ export default function MoonBackground() {
       gsap.registerPlugin(ScrollTrigger);
 
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setClearColor(0x000000,0);
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.domElement.style.position = "fixed";
       renderer.domElement.style.inset = "0";
-      renderer.domElement.style.zIndex = "-10";
+      renderer.domElement.style.zIndex = "0";
       renderer.domElement.style.pointerEvents = "none";
       containerRef.current?.appendChild(renderer.domElement);
 
@@ -42,7 +43,7 @@ export default function MoonBackground() {
       );
       camera.position.z = 6;
 
-      scene.add(new THREE.AmbientLight(0x000000, 0.3));
+      scene.add(new THREE.AmbientLight(0x000000, 0.7));
 
       const loader = new THREE.TextureLoader();
       const moonTexture = loader.load(
@@ -51,11 +52,13 @@ export default function MoonBackground() {
 
       // Shader with dark side blending to rgba(0,0,0,0.3)
       const moonMat = new THREE.ShaderMaterial({
+        transparent:true,
         uniforms: {
           uTexture: { value: moonTexture },
           uLightDir: { value: new THREE.Vector3(1, 0, 0) }, // waxing crescent: light from right → C shape
-          uDarkColor: { value: new THREE.Color(0x000000) },
+          uDarkColor: { value: new THREE.Color(0x030f02) },
           uDarkAlpha: { value: 0.3 },
+          uGlobalAlpha: { value: 0.9},
         },
         vertexShader: `
           varying vec3 vNormal;
@@ -71,25 +74,29 @@ export default function MoonBackground() {
           uniform vec3 uDarkColor;
           uniform float uDarkAlpha;
           varying vec3 vNormal;
+          uniform float uGlobalAlpha;
           varying vec2 vUv;
 
           void main(){
-            vec3 tex = texture2D(uTexture, vUv).rgb;
-            float light = dot(normalize(vNormal), normalize(uLightDir));
-            light = clamp(light, 0.0, 1.0);
+          vec3 tex = texture2D(uTexture, vUv).rgb;
+          float light = dot(normalize(vNormal), normalize(uLightDir));
+          light = clamp(light, 0.0, 1.0);
 
-            // Lit color
-            vec3 lit = tex * light;
+          // brighten lit side: add + scale
+          vec3 lit = tex * (0.4 + 1.6 * light); 
+          
 
-            // Dark side: exactly background color (black with alpha 0.3)
-            vec3 bg = uDarkColor;  
-            vec3 darkSide = mix(tex, bg, 1.0); // full replace with bg color
+          // Dark side blends with background
+          vec3 bg = uDarkColor;  
+          vec3 darkSide = mix(tex * 0.2, bg, 0.8); // force darker shadows
 
-            // Blend lit side and dark side based on light
-            vec3 finalColor = mix(darkSide, lit, light);
+          // Mix lit & dark sides
+          vec3 finalColor = mix(darkSide, lit, light);
 
-            gl_FragColor = vec4(finalColor, 1.0);
-          }
+          gl_FragColor = vec4(finalColor, uGlobalAlpha);
+        }
+
+
 `,
       });
       moonMatRef.current = moonMat;
