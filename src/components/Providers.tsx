@@ -1,12 +1,18 @@
-    "use client";
-    import { PhaseProvider } from "../app/context/PhaseContext";
-    import MoonBackground from "./MoonBackground";
+"use client";
+import React from "react";
+import { PhaseProvider } from "../app/context/PhaseContext";
+import MoonBackground from "./MoonBackground";
 
-    export default function Providers({ children }) {
-      return (
-        <PhaseProvider>
-          <MoonBackground />
-          {children}
-        </PhaseProvider>
-      );
-    }
+interface ProvidersProps {
+  children: React.ReactNode;
+}
+
+
+export default function Providers({ children }: ProvidersProps) {
+  return (
+    <PhaseProvider>
+      <MoonBackground />
+      {children}
+    </PhaseProvider>
+  );
+}
