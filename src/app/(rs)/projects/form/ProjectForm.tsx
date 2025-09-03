@@ -68,7 +68,7 @@ export default function ProjectForm() {
       form.reset();
       setPreviewUrl(null);
     } catch (err) {
-      toast.error("Error: Failed to add project");
+      toast.error(`Error: Failed to add project ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setLoading(false);
     }

@@ -183,7 +183,7 @@ export default function MoonBackground() {
       const t2 = 2 / sectionCount; 
       const t3 = 3 / sectionCount;
       const t4 = 4 / sectionCount;
-      const t5 = 5 / sectionCount;
+      
 
       // 1, 0, -0.2
       // 1 , 0 , -2.5
