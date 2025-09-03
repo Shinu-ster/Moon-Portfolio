@@ -10,7 +10,7 @@ export default function Projects() {
       <div className="flex-1 p-8 overflow-auto">
         <ProjectForm />
       </div>
-
+      <p className="ml-8 text-white overflow-auto">Drag the Projects you want to display</p>
       {/* ProjectsDisplay: takes bottom half */}
       <div className="flex-1 p-8 bg-black text-white overflow-auto">
         <ProjectsDisplay />

@@ -50,7 +50,7 @@ export default function ProjectForm() {
         body: formData,
       });
 
-      console.log(res)
+      console.log(res);
       if (!res.ok) {
         toast.error("Failed to add Projects");
         throw new Error("Failed to add project");
@@ -59,7 +59,7 @@ export default function ProjectForm() {
       toast.success("Project inserted successfully");
 
       const newProject = await res.json();
-      
+
       console.log("new Project", newProject);
       window.dispatchEvent(
         new CustomEvent("project-added", { detail: newProject })
@@ -68,7 +68,6 @@ export default function ProjectForm() {
       form.reset();
       setPreviewUrl(null);
     } catch (err) {
-      
       toast.error("Error: Failed to add project");
     } finally {
       setLoading(false);
@@ -101,7 +100,7 @@ export default function ProjectForm() {
                 <div className="space-y-2">
                   <CldUploadButton
                     uploadPreset="moon_cloudinary_app"
-                    options={{ folder: "projects" }}
+                    options={{ folder: "projects", sources: ["local"] }}
                     onSuccess={(result) => {
                       if (result?.event === "success") {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
