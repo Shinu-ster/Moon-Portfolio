@@ -22,7 +22,7 @@ const About = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return; // ensure ref exists
+    if (!containerRef.current) return; 
     const elements = containerRef.current.children;
 
     gsap.fromTo(
@@ -33,12 +33,12 @@ const About = () => {
         opacity: 1,
         duration: 1,
         ease: "power2.out",
-        stagger: 0.2, // animate one after another
+        stagger: 0.2, 
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
           end: "bottom 20%",
-          scrub: true, // smooth scroll-linked animation
+          scrub: true, 
         },
       }
     );

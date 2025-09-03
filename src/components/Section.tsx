@@ -31,7 +31,7 @@ export default function Section({
     <section
       id={id}
       className={`flex items-center justify-center section relative z-20 text-white snap-start ${className}`}
-      style={{ height }} // exact height of viewport
+      style={{ height }} 
     >
       <div className="max-w-4xl text-center">{children}</div>
     </section>

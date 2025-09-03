@@ -1,5 +1,5 @@
 "use client";
-import { ABeeZee, Quicksand } from "next/font/google";
+
 import Navbar from "@/components/Navbar";
 import ProjectSection from "@/components/ProjectSection";
 import CallToAction from "@/components/CallToAction";

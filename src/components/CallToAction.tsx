@@ -20,7 +20,7 @@ export default function CallToAction() {
       scrollTrigger: {
         trigger: leftRef.current.parentElement,
         start: "top 70%",
-        toggleActions: "play none none none", // play once on scroll in
+        toggleActions: "play none none none", 
       },
     });
 

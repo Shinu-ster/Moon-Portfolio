@@ -5,6 +5,7 @@ import { Card, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ABeeZee, Quicksand } from "next/font/google";
+import { toast } from "sonner";
 
 const aBeeZee = ABeeZee({ subsets: ["latin"], weight: "400" });
 const quickSand = Quicksand({ subsets: ["latin"], weight: "400" });
@@ -14,7 +15,7 @@ type Project = {
   title: string;
   imageUrl: string;
   isFeatured: boolean;
-  type?: string; // e.g. "Website", "App Design"
+  type?: string; 
 };
 
 export default function ProjectSection() {
@@ -26,7 +27,7 @@ export default function ProjectSection() {
       .then((data: Project[]) => {
         setProjects(data.filter((p) => p.isFeatured));
       })
-      .catch((err) => console.error("Error fetching projects:", err));
+      .catch((err) => toast.error("Error fetching projects:", err));
   }, []);
 
   return (

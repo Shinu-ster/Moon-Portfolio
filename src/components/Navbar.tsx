@@ -93,9 +93,8 @@ export default function Navbar() {
   return (
     <nav className="fixed top-4 left-1/2 z-50 w-full max-w-5xl -translate-x-1/2 flex justify-center">
       {/* Desktop: original navbar */}
-      {/* Desktop: original navbar */}
       <div className="hidden md:flex relative flex h-12 w-[90%] items-center overflow-hidden rounded-full border border-white bg-white shadow-md px-4">
-        {/* Left side: Name */}
+
         <div className={`text-black font-bold mr-4 ${aBeeZee.className}`}>
           <Link href={`/#hero`} onClick={handleClick("hero")}>
             Sajat Bajracharya
