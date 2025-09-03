@@ -1,8 +1,8 @@
+// app/layout.tsx (Server Component, no "use client")
 import type { Metadata } from "next";
-
 import "./globals.css";
-import Providers from "../components/Providers";
 import { Toaster } from "@/components/ui/sonner";
+import ClientLayout from "../components/ClientLayout";
 
 export const metadata: Metadata = {
   title: "Moon style Portfolio",
@@ -14,14 +14,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const showBackground =
-    typeof window !== "undefined" ? window.location.pathname === "/" : true;
-    // console.log(showBackground)
   return (
     <html lang="en">
-      <body className="relative z-10">
-        <Toaster/>
-        {showBackground ? <Providers>{children}</Providers> : <>{children}</>}
+      <body className="relative z-10 bg-black text-white">
+        <Toaster />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
